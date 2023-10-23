@@ -5,17 +5,12 @@ import { useEffect, useState } from "react";
 import useSWR from "swr";
 
 const ProductPage = () => {
-  const [isLogin, setIsLogin] = useState(true);
   // const [products, setProducts] = useState([]);
   const { push } = useRouter();
 
-  useEffect(() => {
-    // jika belum login
-    if (!isLogin) {
-      // redirect ke halaman login
-      push("/auth/login");
-    }
-  }, []);
+  // useEffect(() => {
+  //   push("/");
+  // },[])
 
   const { data, error, isLoading } = useSWR("/api/product", fetcher);
   
