@@ -22,18 +22,17 @@ const LoginView = () => {
         email: event.target.email.value,
         password: event.target.password.value,
         callbackUrl,
-      })
-      
+      });
+
       // jika respon tidak error, panggil callbackURL
-      if(!res?.error) {
+      if (!res?.error) {
         setIsLoading(false);
         push(callbackUrl);
       } else {
         setIsLoading(false);
         setError("Email or Password is incorrect");
       }
-
-    } catch (error:any) {
+    } catch (error: any) {
       setIsLoading(false);
       setError("Email or Password is incorrect");
     }
@@ -48,10 +47,7 @@ const LoginView = () => {
       <div className={styles.login__form}>
         <form onSubmit={handleSubmit}>
           <div className={styles.login__form__item}>
-            <label
-              htmlFor="email"
-              className={styles.login__form__item__label}
-            >
+            <label htmlFor="email" className={styles.login__form__item__label}>
               Email
             </label>
             <input
@@ -87,10 +83,23 @@ const LoginView = () => {
             {isLoading ? "Loading..." : "Login"}
           </button>
         </form>
+
+        <button
+          onClick={() =>
+            signIn("google", {
+              callbackUrl,
+              redirect: false,
+            })
+          }
+          className={styles.login__form__item__google}
+        >
+          Sign In with Google
+        </button>
       </div>
 
       <p className={styles.login__link}>
-        Don{"'"}t Have an account? Sign Up <Link href="/auth/register">here</Link>
+        Don{"'"}t Have an account? Sign Up{" "}
+        <Link href="/auth/register">here</Link>
       </p>
     </div>
   );

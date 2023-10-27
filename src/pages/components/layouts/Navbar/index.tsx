@@ -1,14 +1,26 @@
+/* eslint-disable @next/next/no-img-element */
 import styles from "./Navbar.module.css";
 import { signIn, useSession, signOut } from "next-auth/react";
 
-export default function Navbar() {
+const Navbar = () => {
   const { data }: any = useSession();
 
   return (
     <div className={styles.navbar}>
       <div>Navbar</div>
-      <div>
+      <div className={styles.profile}>
+        
+        {data?.user?.image && (
+          <img
+            className={styles.avatar}
+            src={data.user.image}
+            alt={data.user.fullname}
+          />
+        )}
+
         {data && data.user.fullname}
+        {""}
+
         {data ? (
           <button className={styles.button} onClick={() => signOut()}>
             Sign Out
@@ -21,4 +33,6 @@ export default function Navbar() {
       </div>
     </div>
   );
-}
+};
+
+export default Navbar;
