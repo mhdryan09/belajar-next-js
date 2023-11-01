@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import Image from "next/image";
 import styles from "./Navbar.module.css";
 import { signIn, useSession, signOut } from "next-auth/react";
 
@@ -11,7 +12,9 @@ const Navbar = () => {
       <div className={styles.profile}>
         
         {data?.user?.image && (
-          <img
+          <Image
+            width={30}
+            height={30}
             className={styles.avatar}
             src={data.user.image}
             alt={data.user.fullname}
